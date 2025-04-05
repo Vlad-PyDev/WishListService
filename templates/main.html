@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вишлист</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Ваш вишлист</h1>
+    <form method="post" action="{{ url_for('wishlist') }}">
+      <input type="text" name="item" placeholder="Добавьте товар" required>
+      <br><br>
+      <button type="submit">Добавить</button>
+    </form>
+    {% if wishlist %}
+      <h2>Список товаров:</h2>
+      <ul>
+        {% for item in wishlist %}
+          <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if wishlist_id %}
+      <p>Поделитесь ссылкой: <a href="{{ url_for('wishlist', _external=True) }}?id={{ wishlist_id }}">{{ url_for('wishlist', _external=True) }}?id={{ wishlist_id }}</a></p>
+    {% endif %}
+    <a href="{{ url_for('index') }}" class="button">На главную</a>
+  </div>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
